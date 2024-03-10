@@ -41,6 +41,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.1"
@@ -48,6 +49,34 @@ android {
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
+        }
+    }
+
+    flavorDimensions += "environment"
+    productFlavors {
+        create("dev") {
+            dimension = "environment"
+            buildConfigField(
+                "String",
+                "BASE_URL",
+                "\"https://namegame.willowtreeapps.com/api/v1.0/\""
+            )
+        }
+        create("qa") {
+            dimension = "environment"
+            buildConfigField(
+                "String",
+                "BASE_URL",
+                "\"https://namegame.willowtreeapps.com/api/v1.0/\""
+            )
+        }
+        create("prod") {
+            dimension = "environment"
+            buildConfigField(
+                "String",
+                "BASE_URL",
+                "\"https://namegame.willowtreeapps.com/api/v1.0/\""
+            )
         }
     }
 }
@@ -65,6 +94,9 @@ dependencies {
     // Hilt
     implementation(libs.bundles.hilt)
     kapt(libs.bundles.hilt.kapt)
+
+    // Retrofit
+    implementation(libs.bundles.retrofit)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)

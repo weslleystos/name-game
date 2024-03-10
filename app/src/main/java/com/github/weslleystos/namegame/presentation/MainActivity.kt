@@ -14,8 +14,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.github.weslleystos.namegame.R
 import com.github.weslleystos.namegame.presentation.theme.NameGameTheme
+import com.github.weslleystos.namegame.presentation.vm.GameViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -30,6 +32,7 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background,
                 ) {
                     Box {
+                        val viewModel = hiltViewModel<GameViewModel>()
                         Image(
                             modifier = Modifier.align(Alignment.CenterStart),
                             painter = painterResource(id = R.drawable.background),
