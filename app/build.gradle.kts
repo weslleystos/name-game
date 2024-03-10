@@ -44,7 +44,7 @@ android {
         buildConfig = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
+        kotlinCompilerExtensionVersion = "1.5.10"
     }
     packaging {
         resources {
@@ -84,12 +84,10 @@ android {
 dependencies {
     implementation(libs.core.ktx)
     implementation(libs.lifecycle.runtime.ktx)
-    implementation(libs.activity.compose)
+
+    // Compose
     implementation(platform(libs.compose.bom))
-    implementation(libs.ui)
-    implementation(libs.ui.graphics)
-    implementation(libs.ui.tooling.preview)
-    implementation(libs.material3)
+    implementation(libs.bundles.compose)
 
     // Hilt
     implementation(libs.bundles.hilt)
@@ -98,11 +96,18 @@ dependencies {
     // Retrofit
     implementation(libs.bundles.retrofit)
 
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.test.ext.junit)
-    androidTestImplementation(libs.espresso.core)
+    // Glide
+    implementation(libs.glide)
+
+    // Unit Test
+    testImplementation(libs.bundles.unit.tests)
+
+    // Ui Test
     androidTestImplementation(platform(libs.compose.bom))
-    androidTestImplementation(libs.ui.test.junit4)
-    debugImplementation(libs.ui.tooling)
-    debugImplementation(libs.ui.test.manifest)
+    androidTestImplementation(libs.bundles.ui.tests)
+
+    debugImplementation(libs.bundles.debug)
+
+    kaptTest(libs.bundles.hilt.kapt.test)
+    kaptAndroidTest(libs.bundles.hilt.kapt.test)
 }
