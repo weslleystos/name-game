@@ -1,4 +1,4 @@
-package com.github.weslleystos.namegame.ui.theme
+package com.github.weslleystos.namegame.presentation.theme
 
 import android.app.Activity
 import android.os.Build

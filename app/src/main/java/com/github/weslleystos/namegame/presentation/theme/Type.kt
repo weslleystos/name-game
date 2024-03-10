@@ -1,4 +1,4 @@
-package com.github.weslleystos.namegame.ui.theme
+package com.github.weslleystos.namegame.presentation.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
