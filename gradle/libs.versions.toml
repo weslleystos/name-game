@@ -1,5 +1,6 @@
 [versions]
 agp = "8.3.0"
+compose = "1.0.0-beta01"
 kotlin = "1.9.22"
 core-ktx = "1.12.0"
 lifecycle-runtime-ktx = "2.7.0"
@@ -20,7 +21,7 @@ hilt-navigation-compose = "1.2.0"
 retrofit = "2.9.0"
 moshi = "1.15.1"
 
-# Glider
+# Glide
 glide-compose = "1.0.0-beta01"
 
 #Test
@@ -52,7 +53,7 @@ compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling
 # Integration with activities
 activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activity-compose" }
 # Integration with ViewModels
-lifecycle-viewmodel-compose = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version = "viewmodel-compose" }
+lifecycle-viewmodel-compose = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "viewmodel-compose" }
 # Support drawables
 accompanist-drawable-painter = { group = "com.google.accompanist", name = "accompanist-drawablepainter", version.ref = "accompanist-drawablepainter" }
 # Navigation
@@ -76,7 +77,7 @@ moshi-kotlin = { group = "com.squareup.moshi", name = "moshi-kotlin", version.re
 moshi-adapters = { group = "com.squareup.moshi", name = "moshi-adapters", version.ref = "moshi" }
 
 # Glide
-glide = { group = "com.github.bumptech.glide", name = "compose", version = "glide-compose" }
+glide = { module = "com.github.bumptech.glide:compose", version.ref = "glide-compose" }
 
 # Tests
 kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "kotlin-coroutines" }

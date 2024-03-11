@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Name Game</string>
+    <string name="background_description">Name game background image</string>
+    <string name="icon_arrow_back_description">Icon arrow back</string>
+    <string name="start_screen_practice_mode">Practice Mode</string>
+    <string name="start_screen_timed_mode">Timed Mode</string>
+    <string name="start_screen_game_descritption">Try matching the WillowTree Employee to their photo</string>
 </resources>

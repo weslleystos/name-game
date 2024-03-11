@@ -11,5 +11,7 @@ import androidx.compose.ui.graphics.Color
 //val Pink40 = Color(0xFF7D5260)
 
 val PrimaryColor = Color(0xFF223547)
-val SecondaryColor =  Color(0xFF1B2A39)
-val TertiaryColor=  Color(0xFF294055)
+val SecondaryColor = Color(0xFF1B2A39)
+val TertiaryColor = Color(0xFF1B2A39)
+val BackgroundButton = Color(0xFF15659D)
+val BackgroundToolbar = Color(0xFF2B4C68)

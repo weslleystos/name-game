@@ -3,20 +3,19 @@ package com.github.weslleystos.namegame.presentation
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.github.weslleystos.namegame.R
+import androidx.navigation.NavHostController
+import androidx.navigation.NavType
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.github.weslleystos.namegame.presentation.theme.NameGameTheme
+import com.github.weslleystos.namegame.presentation.ui.GameScreen
+import com.github.weslleystos.namegame.presentation.ui.Screen
+import com.github.weslleystos.namegame.presentation.ui.StartScreen
+import com.github.weslleystos.namegame.presentation.ui.getRoute
 import com.github.weslleystos.namegame.presentation.vm.GameViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -26,40 +25,36 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             NameGameTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.primary,
-                ) {
-                    Box {
-                        val viewModel = hiltViewModel<GameViewModel>()
-                        Image(
-                            modifier = Modifier.align(Alignment.CenterStart),
-                            painter = painterResource(id = R.drawable.background),
-                            contentDescription = "Name game background image"
-                        )
-                    }
-                }
+                AppNavHost(navController = rememberNavController())
+            }
+        }
+    }
+
+    @Composable
+    private fun AppNavHost(
+        navController: NavHostController,
+    ) {
+        NavHost(
+            navController = navController,
+            startDestination = Screen.StartScreen.route
+        ) {
+            composable(Screen.StartScreen.route) {
+                hiltViewModel<GameViewModel>()
+                StartScreen(
+                    onPractice = {
+                        navController.navigate(Screen.GameScreen.getRoute("practice"))
+                    },
+                    onTimed = {}
+                )
+            }
+            composable(
+                route = Screen.GameScreen.route,
+                arguments = listOf(navArgument("type") { type = NavType.StringType })
+            ) { backStackEntry ->
+                val type = backStackEntry.arguments?.getString("type") ?: ""
+                GameScreen(onSelected = {}, onBack = { navController.popBackStack() })
             }
         }
     }
 }
 
-@Composable
-fun Greeting(
-    name: String,
-    modifier: Modifier = Modifier,
-) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier,
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    NameGameTheme {
-        Greeting("Android")
-    }
-}
