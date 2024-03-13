@@ -1,8 +1,9 @@
 package com.github.weslleystos.namegame.presentation.ui
 
 import android.content.res.Configuration
-import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -21,17 +22,23 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
 import com.github.weslleystos.namegame.R
+import com.github.weslleystos.namegame.domain.model.Profile
 import com.github.weslleystos.namegame.presentation.components.CircularProgressTimer
 import com.github.weslleystos.namegame.presentation.theme.BackgroundToolbar
+import com.github.weslleystos.namegame.presentation.theme.NameGameTheme
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalGlideComposeApi::class)
 @Composable
 fun GameScreen(
     modifier: Modifier = Modifier,
+    profiles: List<Profile>,
+    selectedProfile: Profile? = null,
     onSelected: (Int) -> Unit,
     onBack: () -> Unit,
 ) {
@@ -62,7 +69,15 @@ fun GameScreen(
     ) { paddingValues ->
         val isPortraitMode =
             LocalConfiguration.current.orientation == Configuration.ORIENTATION_PORTRAIT
-        Row(modifier.padding(paddingValues)) {
+        Column(modifier.padding(paddingValues)) {
+            Text(
+                modifier = modifier
+                    .fillMaxWidth()
+                    .padding(16.dp),
+                text = "${selectedProfile?.firstName} ${selectedProfile?.lastName}",
+                textAlign = TextAlign.Center
+            )
+
             LazyVerticalGrid(
                 columns = GridCells.Fixed(if (isPortraitMode) 2 else 3)
             ) {
@@ -75,5 +90,13 @@ fun GameScreen(
                 }
             }
         }
+    }
+}
+
+@Preview(showSystemUi = true)
+@Composable
+fun GameScreenPreview() {
+    NameGameTheme {
+//        GameScreen(onSelected = {}, onBack = {})
     }
 }

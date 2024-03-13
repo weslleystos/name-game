@@ -4,7 +4,9 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -52,7 +54,15 @@ class MainActivity : ComponentActivity() {
                 arguments = listOf(navArgument("type") { type = NavType.StringType })
             ) { backStackEntry ->
                 val type = backStackEntry.arguments?.getString("type") ?: ""
-                GameScreen(onSelected = {}, onBack = { navController.popBackStack() })
+                val viewModel = hiltViewModel<GameViewModel>()
+                val profiles by viewModel.profiles.collectAsStateWithLifecycle(initialValue = emptyList())
+                val selected by viewModel.selected.collectAsStateWithLifecycle(initialValue = null)
+
+                GameScreen(
+                    profiles = profiles,
+                    selectedProfile = selected,
+                    onSelected = {},
+                    onBack = { navController.popBackStack() })
             }
         }
     }
